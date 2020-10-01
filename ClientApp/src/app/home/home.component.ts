@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private todoService: TodoService, public dialog: MatDialog) { }
-
+  //Set default sort for Completed column, Fill datasource
   ngOnInit(): void {
     this.loadTodoList();
     const sortState: Sort = { active: 'completed', direction: 'asc' };
@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit, AfterViewInit  {
 
   updateTodo(id: string) {
     const dialogRef = this.dialog.open(ToDoAddComponent, {
-      width: '400px',
+      width: '420px',
       data: { passval: id }
      
     });
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit, AfterViewInit  {
   }
   openAdd() {
     const dialogRef = this.dialog.open(ToDoAddComponent, {
-      width: '400px',
+      width: '420px',
        data: { passval: '' }
     });
     console.log(dialogRef);

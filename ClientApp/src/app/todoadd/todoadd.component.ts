@@ -18,12 +18,10 @@ export class ToDoAddComponent implements OnInit {
     if (data.passval != '') {
       this.updateid = data.passval;
     }
-
     this.todoInput = new Todo();
   }
-
+  //If item was selected with edit, load item's data
   ngOnInit(): void {
-
     if (this.updateid != '') {
       this.todoService.getTodo(this.updateid).subscribe(oldTodo => {
         this.todoInput = oldTodo;
@@ -36,6 +34,7 @@ export class ToDoAddComponent implements OnInit {
   }
 
   saveTodo(): void {
+    //Create
     if (this.updateid == '') {
       const newTodo = new Todo();
       newTodo.name = this.todoInput.name;
@@ -44,7 +43,7 @@ export class ToDoAddComponent implements OnInit {
         this.todoAddDialog.close();
       });
     } else {
-      //UPDATE
+      //Update
       const updateTodo = new Todo();
       updateTodo.name = this.todoInput.name;
       updateTodo.id = this.todoInput.id;
