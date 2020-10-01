@@ -5,37 +5,38 @@
 </div>
 
 <div class="todo-container mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="id">
+  <table mat-table [dataSource]="dataSource" matSort >
+    <ng-container matColumnDef="id" class="green">
       <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Feladat </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Feladat </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="completed">
-      <mat-header-cell *matHeaderCellDef> Kész </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kész </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.completed | igennem}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="operations">
       <mat-header-cell *matHeaderCellDef> Műveletek </mat-header-cell>
       <mat-cell *matCellDef="let element">
+        <a (click)="done(element)" *ngIf="element.completed == false" class="operations" matToolTip="Kész"><i class="material-icons">done</i></a>
         <a (click)="updateTodo(element.id)" class="operations" matToolTip="Szerkesztés"><i class="material-icons">edit</i></a>
         <a (click)="onDelete(element.id)" class="operations" style="color:#0366d6; cursor:pointer;" matTooltip="Törlés"><i class="material-icons">delete</i></a>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row  [ngClass]="{'green': row.completed == true}" *matRowDef="let row; columns: displayedColumns;" ></mat-row>
   </table>
-  <mat-paginator [pageSizeOptions]="[25, 10, 5]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
 
 </div>
 <div>
-  <button (click)="openAdd()" mat-mini-fab matToolTip="Feladat hozzáadása" class="plus-button" ><i class="material-icons">add</i></button>
+  <button (click)="openAdd()"  mat-fab matToolTip="Feladat hozzáadása" class="plus-button" style="    background-color: #388E3C;" ><i class="material-icons">add</i></button>
 
 </div>
