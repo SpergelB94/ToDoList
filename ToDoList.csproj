@@ -30,6 +30,7 @@
     <None Remove="ClientApp\src\app\model\Todo.model.ts" />
     <None Remove="ClientApp\src\app\model\Todo.service.ts" />
     <None Remove="ClientApp\src\app\pipes\index.ts" />
+    <None Remove="ClientApp\src\app\todoadd\todoadd.component.ts" />
     <None Remove="ClientApp\src\material-module.ts" />
   </ItemGroup>
 
@@ -45,6 +46,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\material-module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\pipes\boolean.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\pipes\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\todoadd\todoadd.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

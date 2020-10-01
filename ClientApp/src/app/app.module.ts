@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmDialogComponent } from './configmdialog/confirmdialog.component';
+import { ToDoAddComponent } from './todoadd/todoadd.component';
 import { IgenNemPipe } from './pipes';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { IgenNemPipe } from './pipes';
     NavMenuComponent,
     HomeComponent,
     ConfirmDialogComponent,
+    ToDoAddComponent,
     IgenNemPipe,
   ],
   imports: [
@@ -33,6 +35,6 @@ import { IgenNemPipe } from './pipes';
   exports: [IgenNemPipe],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmDialogComponent]
+  entryComponents: [ConfirmDialogComponent, ToDoAddComponent]
 })
 export class AppModule { }

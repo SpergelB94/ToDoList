@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Feladat</h1>
+<div mat-dialog-content>
+</div>
+<div style=" align-content:center;">
+  <mat-grid-list cols="2">
+    <mat-grid-tile>
+      <mat-form-field floatLabel="auto">
+        <mat-label>Feladat</mat-label>
+        <input matInput required placeholder="Feladat megnevezése" name="taskName" [(ngModel)]="todoInput.name" />        
+      </mat-form-field>
+    </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-slide-toggle name="completed" [(ngModel)]="todoInput.completed"></mat-slide-toggle>
+      </mat-grid-tile>
+  </mat-grid-list>
+  <button mat-button (click)="cancel()">Mégse</button>
+  <button mat-button (click)="saveTodo()">Mentés</button>
+
+</div>

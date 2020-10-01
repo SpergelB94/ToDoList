@@ -1,9 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Todo } from '../model';
 import { TodoService } from '../model/todo.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../configmdialog/confirmdialog.component';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { ToDoAddComponent } from '../todoadd/todoadd.component';
+
 
 
 @Component({
@@ -12,23 +15,39 @@ import { ConfirmDialogComponent } from '../configmdialog/confirmdialog.component
   templateUrl: './home.component.html',
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit  {
+  public array: any;
   displayedColumns: string[] = ['name', 'completed', 'operations'];
-  dataSource: Todo[];
+  dataSource: MatTableDataSource<Todo>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private todoService: TodoService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadTodoList();
+    this.dataSource.paginator = this.paginator;
   }
+
+  
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
 
   loadTodoList() {
     this.todoService.getTodoList().subscribe(result => {
-      this.dataSource = result
+      this.dataSource = new MatTableDataSource(result); 
     },
       error => console.error(error)
     )
   }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
 
   onDelete(id) {
 
@@ -46,7 +65,31 @@ export class HomeComponent implements OnInit {
         );
       }
     });
-}
+  }
+
+  updateTodo(id: string) {
+    const dialogRef = this.dialog.open(ToDoAddComponent, {
+      width: '400px',
+      data: { passval: id }
+     
+    });
+    console.log(dialogRef);
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadTodoList();
+    });
+
+  }
+  openAdd() {
+    const dialogRef = this.dialog.open(ToDoAddComponent, {
+      width: '400px',
+       data: { passval: '' }
+    });
+    console.log(dialogRef);
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadTodoList();
+    });
+
+  }
 }
 
 

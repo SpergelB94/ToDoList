@@ -4,8 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'confirmdialog',
-  templateUrl: './confirmdialog.component.html',
-  styleUrls: ['./confirmdialog.component.css']
+  templateUrl: './confirmdialog.component.html'
 
 })
 
