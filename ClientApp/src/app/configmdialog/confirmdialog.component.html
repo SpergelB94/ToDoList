@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Megerősítés</h1>
+<div mat-dialog-content>
+  <p>Biztosan végrehajtja a műveletet?</p>
+</div>
+<div>
+  <button mat-button (click)="cancel()">Mégse</button>
+  <button mat-button [mat-dialog-close]="true">Igen</button>
+</div>
